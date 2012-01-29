@@ -1,0 +1,73 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3911
+
+Plugin that works like punto-switcher application. (but not absolutely similar, well)
+It helps you if you typed some text in wrong keymap.
+Right now it supports only english and russian keymaps, but you can add your own keymap (You also can send it to me, and i&#039ll add it to next release)
+
+Please NOTE: i tested it on Windows, in Vim 7.3.46, and all works fine in it. But i just get notified that in Linux, in Vim 7.3.353 only mappings ,re  and ,er  work correctly, and there's some issues with <F4> and <S-F4>. I'm trying to solve it.
+
+
+There are some mappings provided by default.
+
+In Insert and Normal modes the following mappings are available:
+
+*) <F4> translates current word. If you press <F4> again, then previous word
+   will be translated, and so on. Every <F4> keystroke gives you next word
+   translated, until you press <F4> from another cursor position.
+   Here&#039s example, say you just typed this: (\"|\" sign means cursor position) >
+      I don&#039t like ГИБДД мукн ьгсрю|
+<
+   Then you think: \"oops\", press <F4> twice, and here&#039s what you get: >
+      I don&#039t like ГИБДД very much.|
+<
+
+*) <S-F4> tries to autodetect what are you trying to translate. Basically, it 
+   translates all the last text typed in one langmap. 
+
+   Here&#039s example: (\"|\" sign means cursor position) >
+      The quick brown fox огьзы щмук еру дфян вщпю|
+<
+   Then you press <S-F4>, and text becomes translated to >
+      The quick brown fox jumps over the lazy dog.|
+<
+   If you press <S-F4> again, it will toggle the last translation.
+
+
+============================================================================
+
+You are also able to select exactly what you need to translate and press one
+of the following predefined mappings:
+
+*) ,er   translates selected text en-ru
+*) ,re   translates selected text ru-en
+
+============================================================================
+
+If you don&#039t like these predefined mappings for some reason, you can disable
+it and specify your own ones, just like that: >
+
+   " disable predefined mappings
+   let g:pswitcher_no_default_key_mappings = 1
+   
+   " visual mode mappings
+   vmap ,er <Plug>(pswitcher-selected-en-ru)
+   vmap ,re <Plug>(pswitcher-selected-ru-en)
+
+   " insert and normal mode mapping for last word translation
+   imap <F4> <Plug>(pswitcher-input-word)
+   map  <F4> <Plug>(pswitcher-word)
+
+   " insert and normal mode mapping for auto text translation
+   imap <S-F4> <Plug>(pswitcher-input-auto)
+   map  <S-F4> <Plug>(pswitcher-auto)
+
+
+That's it. Hope you like it.
+Happy Vimming! 
+
+=======================================================
+
+P.S. you can read more detailed info about adding your own keymap here:  
+
+:help pswitcher_two_main_maps
+ 
